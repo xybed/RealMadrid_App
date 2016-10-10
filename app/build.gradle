@@ -1,0 +1,152 @@
+apply plugin: 'com.android.application'
+//获取时间戳
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd HH:mm", TimeZone.getTimeZone("GMT+8:00"))
+}
+
+android {
+    signingConfigs {
+        config {
+            keyAlias 'RealMadrid'
+            keyPassword 'RealMadrid'
+            storeFile file('../../RealMadrid.keystore')
+            storePassword 'RealMadrid'
+        }
+    }
+    compileSdkVersion 23
+    buildToolsVersion '23.0.3'
+
+    defaultConfig {
+        applicationId "com.mumu.realmadrid"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+
+        ndk {
+            // 设置支持的 SO 库构架，注意这里要根据你的实际情况来设置
+            abiFilters 'armeabi','x86','arm64-v8a'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            signingConfig signingConfigs.config
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'DEVELOP_VERSION', '"1"'
+
+            manifestPlaceholders.put("BaiduMobAd_KEY", 'ea16cdf8d1')
+            buildConfigField 'String','Base_Api_Url','"http://192.168.10.133:8080/realmadrid/"'
+            buildConfigField 'String','Time',"\"${releaseTime()}\""
+
+            //渠道包重命名
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        // 输出apk名称为boohee_v1.0_2015-01-15_wandoujia.apk
+                        def fileName = "hjmdl_${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
+        }
+
+        debug {
+            minifyEnabled false
+            shrinkResources false
+//            signingConfig signingConfigs.config
+//            zipAlignEnabled true
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'DEVELOP_VERSION', '"1"'
+
+            manifestPlaceholders.put("BaiduMobAd_KEY", 'ea16cdf8d1')
+            buildConfigField 'String','Base_Api_Url','"http://192.168.10.133:8080/realmadrid/"'
+            buildConfigField 'String','Time',"\"${releaseTime()}\""
+        }
+    }
+
+    afterEvaluate {
+        //这个配置是关于multidex的，生成的apk中会包含多个dex文件，例如classes.dex,classes2.dex
+        tasks.matching {
+            it.name.startsWith('dex')
+        }.each { dx ->
+            if (dx.additionalParameters == null) {
+                dx.additionalParameters = []
+            }
+            dx.additionalParameters += '--multi-dex' // enable multidex
+
+            // optional
+            // dx.additionalParameters += "--main-dex-list=$projectDir/<filename>".toString() // enable the main-dex-list
+        }
+    }
+
+    productFlavors {
+        real001 {}
+        productFlavors.all { flavor ->
+            flavor.manifestPlaceholders = [CHANNEL_VALUE: name]
+        }
+    }
+
+    dexOptions {
+        incremental true
+    }
+
+//    sourceSets.main {
+//        jniLibs.srcDir 'libs'
+//    }
+
+    repositories{
+        flatDir{
+            dirs 'libs'//this way we can find the .aar file in libs folder
+        }
+    }
+}
+
+dependencies {
+    //    compile fileTree(dir: 'libs', include: ['*.jar'])这种写法的话,应该尽量避免,很难区分版本
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:support-v4:23.1.1'
+    //百度统计3.7.3.1，人物画像1.4
+    compile files('libs/user_profile_mtj_1.4.jar')
+    //百度地图3.7.3、定位6.2.3
+    compile files('libs/BaiduLBS_Android.jar')
+    //极光推送2.1.3
+    compile files('libs/jpush-android-2.1.3.jar')
+    //ShareSDK 2.7.2
+    compile fileTree(include: ['Mob*.jar'], dir: 'libs')
+    compile fileTree(include: ['ShareSDK*.jar'], dir: 'libs')
+    //mob的短信sdk 2.0.2
+    compile name: 'SMSSDK-2.0.2', ext: 'aar'
+    //用于解决Dex方法数超出限制的问题
+    compile 'com.android.support:multidex:1.0.1'
+    //    //图片加载框架，fresco 0.10.0
+    //    compile 'com.facebook.fresco:fresco:0.10.0'
+    //网络加载框架, okhttp 3.2.0
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    //兼容4.4沉浸式状态栏
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.4'
+    //butterknife 7.0.1
+    compile 'com.jakewharton:butterknife:7.0.1'
+    //谷歌json解析的框架
+    compile 'com.google.code.gson:gson:2.6.2'
+    //一个具有material design思想的edittext
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    //三方MaterialDesignLibrary(包含许多控件)
+//    compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
+    //福哥推荐的三方材料设计库，包含许多控件
+    //    compile 'com.github.rey5137:material:1.2.2'
+    //图片加载框架, glide 3.7.0
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    //rxjava+retrofit导的库
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    //底部tab栏库
+    compile 'com.ashokvarma.android:bottom-navigation-bar:1.3.0'
+}
