@@ -20,6 +20,7 @@ public abstract class BaseMyAdapter<T> extends BaseAdapter {
 	protected Context context;
 	protected List<T> datas;
 	protected LayoutInflater mInflater;
+	private String lala;
 	
 	public BaseMyAdapter(Context context){
 		this.context = context;
