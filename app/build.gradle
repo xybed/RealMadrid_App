@@ -9,7 +9,7 @@ android {
         config {
             keyAlias 'RealMadrid'
             keyPassword 'RealMadrid'
-            storeFile file('../../RealMadrid.keystore')
+            storeFile file('../RealMadrid.keystore')
             storePassword 'RealMadrid'
         }
     }
