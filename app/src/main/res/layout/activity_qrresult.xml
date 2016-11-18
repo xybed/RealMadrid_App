@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/theme_bg_color" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/theme_color"
+        android:orientation="horizontal" >
+        <FrameLayout android:id="@+id/ids_activity_qrresult_back"
+            android:layout_width="50.0dip"
+            android:layout_height="match_parent"
+            android:clickable="true" >
+            <ImageView
+                android:layout_width="26.0dip"
+                android:layout_height="26.0dip"
+                android:layout_gravity="center"
+                android:src="@drawable/bar_back_btn"
+                android:contentDescription="@null" />
+        </FrameLayout>
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10.0dip"
+            android:layout_marginBottom="10.0dip"
+            android:background="@color/theme_color_white"/>
+        <TextView
+            android:layout_width="0.0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:layout_marginLeft="8.0dip"
+            android:gravity="center_vertical"
+            android:text="扫描结果"
+            android:textSize="16.0sp"
+            android:textColor="@color/theme_color_white" />
+	</LinearLayout>
+	<FrameLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="50.0dip"
+	    android:layout_marginLeft="20.0dip" >
+	    <TextView android:id="@+id/ids_activity_qrresult_type"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="bottom|left"
+	        android:text="网址："
+	        android:textSize="13.0sp"
+	        android:textColor="@color/theme_color_gray_a" />
+	</FrameLayout>
+	
+	<LinearLayout android:id="@+id/ids_activity_qrresult_content"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="20.0dip"
+	    android:layout_marginRight="20.0dip"
+	    android:layout_marginTop="20.0dip"
+	    android:orientation="vertical"
+	    android:clickable="true">
+	    <View
+	        android:layout_width="match_parent"
+	        android:layout_height="0.5dp"
+	        android:background="@color/theme_color_gray_b" />
+	    <TextView android:id="@+id/ids_activity_qrresult_text"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="15.0dip"
+	        android:layout_marginBottom="15.0dip"
+	        android:singleLine="false"
+	        android:gravity="left|center_vertical"
+	        android:textSize="15.0sp"
+	        android:textColor="@color/theme_color_black_a"
+	        android:text="" />
+	    <View
+	        android:layout_width="match_parent"
+	        android:layout_height="0.5dp"
+	        android:background="@color/theme_color_gray_b" />
+	    
+	    <Button android:id="@+id/ids_activity_qrresult_copy"
+	        android:layout_width="match_parent"
+	        android:layout_height="40.0dip"
+	        android:layout_marginTop="30.0dip"
+	        android:textColor="@color/theme_color_black_a"
+	        android:textSize="15.0sp"
+	        android:text="复制内容" />
+	    
+	</LinearLayout>    
+
+</LinearLayout>

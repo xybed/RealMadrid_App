@@ -24,6 +24,7 @@ import java.io.InputStream;
 import butterknife.ButterKnife;
 import lib.utils.DensityUtil;
 import lib.utils.ToastUtil;
+import lib.zxing.MeQrCodeActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,6 +53,7 @@ public class NewsFragment extends BaseFragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(getActivity(), MeQrCodeActivity.class));
             }
         });
         return view;

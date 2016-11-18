@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/theme_bg_color"
+    android:fitsSystemWindows="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/theme_color"
+        android:orientation="horizontal" >
+        <FrameLayout android:id="@+id/ids_activity_me_qrcode_back"
+            android:layout_width="50.0dip"
+            android:layout_height="match_parent"
+            android:clickable="true" >
+            <ImageView
+                android:layout_width="26.0dip"
+                android:layout_height="26.0dip"
+                android:layout_gravity="center"
+                android:src="@drawable/bar_back_btn"
+                android:contentDescription="@null" />
+        </FrameLayout>
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10.0dip"
+            android:layout_marginBottom="10.0dip"
+            android:background="@color/theme_color_gray_b"/>
+        <TextView
+            android:layout_width="0.0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:layout_marginLeft="8.0dip"
+            android:gravity="center_vertical"
+            android:text="我的二维码"
+            android:textSize="16.0sp"
+            android:textColor="@color/theme_color_white" />
+	</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal" > 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.0dip"
+            android:layout_weight="1.0" />     
+        <ImageView android:id="@+id/ids_activity_me_qrcode_img"
+            android:layout_width="200.0dip"
+            android:layout_height="200.0dip"
+            android:scaleType="center"
+            android:src="@null"
+            android:contentDescription="@null" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20.0dip"
+            android:text="扫一扫加好友"
+            android:textSize="13.0sp"
+            android:textColor="@color/theme_color_gray_b" />
+        
+        <Button android:id="@+id/ids_activity_me_qrcode_copy"
+	        android:layout_width="match_parent"
+	        android:layout_height="40.0dip"
+	        android:layout_marginTop="30.0dip"
+	        android:layout_marginLeft="20.0dip"
+	        android:layout_marginRight="20.0dip"
+	        android:textColor="@color/theme_color_black_a"
+	        android:textSize="15.0sp"
+	        android:text="复制链接地址" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.0dip"
+            android:layout_weight="1.0" />
+    </LinearLayout>
+</LinearLayout>

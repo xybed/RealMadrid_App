@@ -32,7 +32,7 @@ public class BallFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ball, container, false);
         ButterKnife.bind(this, view);
-        Glide.with(this).load("http://172.17.11.1:8080/realmadrid/images/test.png").placeholder(R.drawable.bg_banner_2).into(image);
+        Glide.with(this).load("http://192.168.1.106:8080/realmadrid/images/test.png").placeholder(R.drawable.bg_banner_2).into(image);
         return view;
     }
 

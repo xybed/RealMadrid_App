@@ -3,7 +3,6 @@ package com.mumu.realmadrid.view.mine;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,20 +13,14 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.mumu.realmadrid.MyApplication;
 import com.mumu.realmadrid.R;
-import com.mumu.realmadrid.api.UserService;
-import com.mumu.realmadrid.http.HttpRequestParams;
-import com.mumu.realmadrid.http.HttpRetrofit;
-import com.mumu.realmadrid.http.RetroResListener;
-import com.mumu.realmadrid.model.User;
 import com.mumu.realmadrid.view.BaseFragment;
-
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lib.glide.GlideCircleTransform;
 import lib.utils.ScreenUtil;
+import lib.zxing.CaptureActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,8 +69,6 @@ public class MineFragment extends BaseFragment {
     @OnClick({R.id.llay_top_img, R.id.llay_mine_ball, R.id.llay_mine_love, R.id.llay_mine_task, R.id.llay_mine_opinion, R.id.llay_mine_aboutus, R.id.llay_mine_set})
     public void onClick(View view) {
         Intent intent;
-        HttpRequestParams params;
-        HttpRetrofit httpRetrofit = HttpRetrofit.getInstance();
         switch (view.getId()) {
             case R.id.llay_top_img:
                 if(!MyApplication.getInstance().isLogin()){
@@ -96,6 +87,9 @@ public class MineFragment extends BaseFragment {
             case R.id.llay_mine_opinion:
                 break;
             case R.id.llay_mine_aboutus:
+                //暂时写跳转二维码
+                intent = new Intent(getActivity(), CaptureActivity.class);
+                getActivity().startActivityForResult(intent, 100);
                 break;
             case R.id.llay_mine_set:
                 break;

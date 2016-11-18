@@ -26,6 +26,8 @@ import butterknife.ButterKnife;
 import lib.utils.PhotoUtil;
 import lib.utils.StreamUtil;
 import lib.utils.ToastUtil;
+import lib.zxing.CaptureActivity;
+import lib.zxing.ScanResultActivity;
 
 public class MainActivity extends BaseActivity {
 
@@ -171,6 +173,18 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.e("http", ""+requestCode);
+        Log.e("http", ""+resultCode);
+        if (requestCode == 100) {
+            Bundle bundle2 = data.getExtras();
+            if (null != bundle2 &&
+                    bundle2.containsKey(CaptureActivity.Params_RetState) &&
+                    bundle2.containsKey(CaptureActivity.Params_RetCode)) {
+                boolean isSuc = bundle2.getBoolean(CaptureActivity.Params_RetState);
+                String code = bundle2.getString(CaptureActivity.Params_RetCode);
+                dealScanResult(isSuc, code);
+            }
+        }
         PhotoUtil.onActivityResult(this, requestCode, data, new PhotoUtil.PhotoResultListener() {
             @Override
             public void photoResultSuccess(String path) {
@@ -204,5 +218,33 @@ public class MainActivity extends BaseActivity {
                 ToastUtil.show("失败");
             }
         });
+    }
+
+    private void dealScanResult(boolean isSuc, String val) {
+        if (!isSuc) return;
+//        if (null != val && val.length() > Common.MEQR_Head.length() &&
+//                val.startsWith(Common.MEQR_Head)) {
+//            String sID = val.substring(Common.MEQR_Head.length(), val.length());
+//            long uID = Methods.ParseToLong(sID, 0L);
+//            if (uID > 0) {
+//                showUserDetailActivity(uID);
+//                return;
+//            }
+//        }
+//        if (null != val && val.length() > Common.PAYQR_Head.length() &&
+//                val.startsWith(Common.PAYQR_Head)) {
+//            String sID = val.substring(Common.PAYQR_Head.length(), val.length());
+//            int uID = Methods.ParseToInt(sID, 0);
+//            if (uID > 0) {
+//                showScanToPayActivity(uID);
+//                return;
+//            }
+//        }
+        ShowScanResultActivity(val);
+    }
+    private void ShowScanResultActivity(String val) {
+        Intent intent = new Intent(this, ScanResultActivity.class);
+        intent.putExtra(ScanResultActivity.Params_Val, val);
+        startActivity(intent);
     }
 }
