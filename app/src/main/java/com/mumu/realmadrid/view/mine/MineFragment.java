@@ -15,8 +15,8 @@ import com.bumptech.glide.Glide;
 import com.mumu.realmadrid.MyApplication;
 import com.mumu.realmadrid.R;
 import com.mumu.realmadrid.api.UserService;
-import com.mumu.realmadrid.http.HttpRetrofit;
 import com.mumu.realmadrid.http.HttpRequestParams;
+import com.mumu.realmadrid.http.HttpRetrofit;
 import com.mumu.realmadrid.http.RetroResListener;
 import com.mumu.realmadrid.model.User;
 import com.mumu.realmadrid.view.BaseFragment;
@@ -57,7 +57,7 @@ public class MineFragment extends BaseFragment {
             Glide.with(this).load(R.drawable.icon_default_avatar)
                     .transform(new GlideCircleTransform(getActivity()))
                     .into(imgAvatar);
-            txtUser.setText("登录");
+            txtUser.setText(getString(R.string.user_login));
         }else {
             Glide.with(this).load(MyApplication.getInstance().getUser().getAvatar())
                     .placeholder(R.drawable.icon_default_avatar)
@@ -88,36 +88,8 @@ public class MineFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.llay_mine_ball:
-                params = new HttpRequestParams();
-                params.put("id", "1");
-                httpRetrofit.getList(httpRetrofit.getApiService(UserService.class, "user/showUser", params).getList(params.urlParams), "", new RetroResListener<List<User>>() {
-                    @Override
-                    protected void onSuccess(List<User> result) {
-                        for(User user : result){
-                            Log.e("http", user.getUsername() + "::" +user.getPassword());
-                        }
-                    }
-
-                    @Override
-                    protected void onFailure(String errMsg) {
-                        Log.e("http", errMsg);
-                    }
-                });
                 break;
             case R.id.llay_mine_love:
-                params = new HttpRequestParams();
-                params.put("id", "1");
-                httpRetrofit.getModel(httpRetrofit.getApiService(UserService.class, "user/showUser", params).getUser(params.urlParams), "", new RetroResListener<User>() {
-                    @Override
-                    protected void onSuccess(User result) {
-                        Log.e("http", result.getUsername() + "::" +result.getPassword());
-                    }
-
-                    @Override
-                    protected void onFailure(String errMsg) {
-                        Log.e("http", errMsg);
-                    }
-                });
                 break;
             case R.id.llay_mine_task:
                 break;

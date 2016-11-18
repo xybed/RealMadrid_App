@@ -161,7 +161,7 @@ public class RegisterActivity extends BaseActivity implements RegisterView, Shar
         2.开启倒计时，设置按钮状态
          */
         if(RegexUtil.checkMobile(editUsername.getText().toString())){
-//            SMSSDK.getVerificationCode("86", editUsername.getText().toString());
+            SMSSDK.getVerificationCode("86", editUsername.getText().toString());
             presenter.startTimer();
         }else{
             ToastUtil.show(getString(R.string.user_input_phone_number));

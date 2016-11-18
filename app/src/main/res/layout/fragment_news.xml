@@ -2,8 +2,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/theme_color_gray"
-    android:fitsSystemWindows="true"
-    android:clipToPadding="false"
     android:orientation="vertical">
 
     <Button
