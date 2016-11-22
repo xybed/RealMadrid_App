@@ -1,5 +1,6 @@
 package com.mumu.realmadrid.view.mine;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,6 +16,7 @@ import com.mumu.realmadrid.R;
 import com.mumu.realmadrid.model.member.UserModel;
 import com.mumu.realmadrid.presenter.mine.RegisterPresenter;
 import com.mumu.realmadrid.view.BaseActivity;
+import com.mumu.realmadrid.view.MainActivity;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import butterknife.Bind;
@@ -223,6 +225,11 @@ public class RegisterActivity extends BaseActivity implements RegisterView, Shar
     public void registerSuccess(UserModel result) {
         //注册成功，设置下用户信息
         MyApplication.getInstance().setUser(result);
+        MyApplication.getInstance().setLogin(true);
+        //自动登录
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     @Override
