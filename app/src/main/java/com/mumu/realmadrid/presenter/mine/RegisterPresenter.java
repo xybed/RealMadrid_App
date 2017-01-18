@@ -1,6 +1,6 @@
 package com.mumu.realmadrid.presenter.mine;
 
-import com.mumu.realmadrid.IViewModel.mine.IRegisterViewModel;
+import com.mumu.realmadrid.iviewmodel.mine.IRegisterViewModel;
 import com.mumu.realmadrid.model.member.UserModel;
 import com.mumu.realmadrid.view.mine.RegisterView;
 import com.mumu.realmadrid.viewmodel.mine.RegisterViewModel;

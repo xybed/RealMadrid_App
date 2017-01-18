@@ -1,4 +1,4 @@
-package com.mumu.realmadrid.IViewModel.mine;
+package com.mumu.realmadrid.iviewmodel.mine;
 
 /**
  * Created by 7mu on 2016/10/8.

@@ -1,6 +1,6 @@
 package com.mumu.realmadrid.viewmodel.mine;
 
-import com.mumu.realmadrid.IViewModel.mine.IRegisterViewModel;
+import com.mumu.realmadrid.iviewmodel.mine.IRegisterViewModel;
 import com.mumu.realmadrid.api.mine.RegisterService;
 import com.mumu.realmadrid.http.HttpRequestParams;
 import com.mumu.realmadrid.http.HttpRetrofit;
