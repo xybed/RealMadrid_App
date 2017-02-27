@@ -2,13 +2,11 @@ package lib.cache;
 
 import android.content.Context;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.parser.Feature;
 
 import java.io.File;
 import java.io.InputStream;
-import java.lang.reflect.Type;
-import java.util.List;
 
 import lib.utils.FileUtil;
 
@@ -44,12 +42,10 @@ public class CacheJsonMgr {
             if (jsonStr == null) {
                 return null;
             }
-            Gson gson = new Gson();
             if(jsonStr.startsWith("[")){
-                Type typeList = new TypeToken<List<T>>(){}.getType();
-                object = gson.fromJson(jsonStr, typeList);
+                object = JSON.parseArray(jsonStr, clazz);
             }else {
-                object = gson.fromJson(jsonStr, clazz);
+                object = JSON.parseObject(jsonStr, clazz, Feature.IgnoreNotMatch, Feature.InitStringFieldAsEmpty);
             }
         }
         return object;

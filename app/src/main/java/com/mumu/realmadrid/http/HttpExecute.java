@@ -6,8 +6,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.parser.Feature;
 import com.mumu.realmadrid.BuildConfig;
 import com.mumu.realmadrid.MyApplication;
 import com.mumu.realmadrid.view.mine.LoginActivity;
@@ -16,7 +16,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -182,17 +181,15 @@ public class HttpExecute {
                 sendFailureMsg(httpHandler, mReturn, jsonObject.getString("detail"));
                 return;
             }
-            T obj = null;
+            Object obj = null;
             String data = jsonObject.getString("data");
             if(data != null && !"null".equals(data)){
-                Gson gson = new Gson();
                 if(data.startsWith("[")){
-                    Type typeList = new TypeToken<List<T>>(){}.getType();
-                    obj = gson.fromJson(data, typeList);
+                    obj = JSON.parseArray(data, clazz);
                 }else if(data.startsWith("{")){
-                    obj = gson.fromJson(data, clazz);
+                    obj = JSON.parseObject(data, clazz, Feature.IgnoreNotMatch, Feature.InitStringFieldAsEmpty);
                 }else{
-                    obj = (T) data;
+                    obj = data;
                 }
             }
             sendSuccessMsg(httpHandler, obj);

@@ -136,6 +136,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     //谷歌json解析的框架
     compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.alibaba:fastjson:1.2.23'
     //一个具有material design思想的edittext
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     //三方MaterialDesignLibrary(包含许多控件)
